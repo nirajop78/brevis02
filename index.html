@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Brevis Ecosystem</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Basic Arial font, as per your initial look -->
     <style>
         :root {
             --brevis-green: #28a745;
@@ -13,11 +13,11 @@
             --brevis-dark-gray: #333;
             --text-color: #333;
             --white: #ffffff;
-            --border-color: #ddd;
+            --border-color: #eee; /* Lighter border for original look */
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: Arial, sans-serif; /* Reverted to Arial */
             margin: 0;
             padding: 0;
             background-color: var(--brevis-light-gray);
@@ -26,25 +26,25 @@
         }
 
         header {
-            background-color: var(--brevis-dark-gray); /* Changed header background */
+            background-color: var(--brevis-green); /* Back to green header */
             color: var(--white);
             padding: 1rem 0;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: flex;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex; /* Kept flex for logo */
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 15px; /* Spacing for logo */
         }
         header .logo {
             width: 50px;
             height: 50px;
-            background-color: var(--brevis-green);
+            background-color: var(--brevis-dark-gray); /* Logo color adjusted */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Montserrat', sans-serif;
+            font-family: Arial, sans-serif; /* Font for logo reverted */
             font-weight: 700;
             font-size: 1.5em;
             color: var(--white);
@@ -52,67 +52,50 @@
         }
         header h1 {
             margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+            font-family: Arial, sans-serif; /* Font for h1 reverted */
+            font-weight: bold; /* Original bold */
             font-size: 2.5em;
             color: var(--white);
         }
 
         nav {
-            background-color: var(--brevis-green);
+            background-color: var(--brevis-dark-gray); /* Navigation bar black */
             color: var(--white);
-            padding: 0.8rem 0;
+            padding: 0.5rem 0; /* Original padding */
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         nav a {
             color: var(--white);
             text-decoration: none;
-            padding: 0 1.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            font-weight: 600;
-            font-size: 1.1em;
-            position: relative;
+            padding: 0 1rem; /* Original padding */
+            transition: background-color 0.3s ease; /* Original transition */
+            font-weight: normal; /* Original font-weight */
+            font-size: 1em; /* Original font-size */
+            /* Removed fancy hover underline for original look */
         }
         nav a:hover {
-            background-color: var(--brevis-dark-green);
-            transform: translateY(-2px);
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -5px;
-            transform: translateX(-50%) scaleX(0);
-            width: 0;
-            height: 3px;
-            background-color: var(--white);
-            transition: transform 0.3s ease, width 0.3s ease;
-        }
-        nav a:hover::after {
-            width: 80%;
-            transform: translateX(-50%) scaleX(1);
+            background-color: #555; /* Original hover color */
         }
 
 
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 80%; /* Reverted to 80% width */
             margin: 2rem auto;
             background-color: var(--white);
-            padding: 2.5rem;
-            box-shadow: 0 0 20px rgba(0,0,0,0.08);
-            border-radius: 12px;
+            padding: 2rem; /* Original padding */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Original shadow */
+            border-radius: 8px; /* Original border-radius */
         }
         h1, h2, h3 {
             color: var(--brevis-green);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+            font-family: Arial, sans-serif; /* Reverted to Arial */
+            font-weight: bold; /* Original bold */
             margin-bottom: 1rem;
         }
         h2 {
             font-size: 2em;
-            border-bottom: 2px solid var(--brevis-light-gray);
+            border-bottom: 1px solid var(--border-color); /* Original border */
             padding-bottom: 0.5rem;
             margin-top: 2rem;
         }
@@ -125,9 +108,9 @@
         }
 
         .game-section, .crypto-history-section, .quiz-section {
-            margin-bottom: 3.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 3rem; /* Original margin */
+            padding-bottom: 2rem; /* Original padding */
+            border-bottom: 1px solid var(--border-color); /* Original border */
         }
         .game-section:last-child, .crypto-history-section:last-child, .quiz-section:last-child {
              border-bottom: none; /* No border for the last section */
@@ -136,12 +119,12 @@
 
         .game-area {
             display: flex;
-            flex-direction: column; /* Changed to column for better responsiveness */
+            flex-direction: column;
             align-items: center;
             gap: 20px;
             margin-top: 1.5rem;
             padding: 1.5rem;
-            background-color: #fcfcfc;
+            background-color: #fcfcfc; /* Kept light background for game area */
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
@@ -150,32 +133,37 @@
             display: flex;
             gap: 15px;
             margin-top: 15px;
-            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            flex-wrap: wrap;
             justify-content: center;
         }
 
         .game-canvas {
-            border: 3px solid var(--brevis-green);
-            background-color: #eafaea; /* Light green background for canvas */
+            border: 2px solid var(--brevis-green); /* Original border thickness */
+            background-color: #eee; /* Original lighter background for canvas */
             display: block;
             margin: 0 auto;
-            border-radius: 5px;
+            border-radius: 5px; /* Kept rounded corners */
+            
+            /* --- !!! YEH FIX KIYE GAYE PROPERTIES HAIN !!! --- */
+            width: 100%; /* Make canvas take full width of its parent */
+            max-width: 400px; /* Limit its maximum size to 400px */
+            height: auto; /* Maintain aspect ratio */
         }
 
         .game-info {
             text-align: center;
             margin-top: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: var(--brevis-dark-gray);
+            font-size: 1em; /* Original font size */
+            font-weight: normal; /* Original font weight */
+            color: var(--text-color); /* Original text color */
         }
 
         .high-score-display {
-            font-size: 1.2em;
+            font-size: 1.1em; /* Adjusted slightly */
             font-weight: bold;
             color: var(--brevis-dark-green);
             margin-top: 10px;
-            padding: 8px 15px;
+            padding: 5px 10px; /* Adjusted padding */
             background-color: #e6ffe6;
             border-radius: 5px;
             border: 1px dashed var(--brevis-green);
@@ -187,6 +175,7 @@
             padding: 1rem 1.5rem;
             border-left: 4px solid var(--brevis-green);
             border-radius: 5px;
+            font-size: 0.95em; /* Slightly smaller for instructions */
         }
         .how-to-play h4 {
             color: var(--brevis-green);
@@ -197,13 +186,13 @@
 
         .quiz-options label {
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem; /* Original margin */
             cursor: pointer;
-            font-size: 1.1em;
-            padding: 8px 10px;
+            font-size: 1em; /* Original font-size */
+            padding: 5px 8px; /* Adjusted padding */
             border: 1px solid var(--border-color);
             border-radius: 5px;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease;
         }
         .quiz-options label:hover {
             background-color: #e6ffe6;
@@ -211,37 +200,37 @@
         }
         .quiz-options input[type="radio"] {
             margin-right: 10px;
-            accent-color: var(--brevis-green); /* Style radio button */
+            accent-color: var(--brevis-green);
         }
 
         button {
             background-color: var(--brevis-green);
             color: var(--white);
             border: none;
-            padding: 0.8rem 1.8rem;
+            padding: 0.7rem 1.5rem; /* Original padding */
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 1rem; /* Original font-size */
+            font-weight: normal; /* Original font-weight */
+            transition: background-color 0.3s ease; /* Original transition */
+            box-shadow: none; /* Removed subtle shadow for original look */
         }
         button:hover {
-            background-color: var(--brevis-dark-green);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background-color: var(--brevis-dark-green); /* Original hover color */
+            transform: none; /* Removed transform for original look */
+            box-shadow: none; /* Removed subtle shadow for original look */
         }
         button:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transform: none; /* Removed transform for original look */
+            box-shadow: none; /* Removed subtle shadow for original look */
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem; /* Original padding */
             background-color: var(--brevis-dark-gray);
             color: var(--white);
-            margin-top: 3.5rem;
+            margin-top: 3rem; /* Original margin */
             font-size: 0.9em;
         }
 
@@ -273,9 +262,9 @@
                 flex-direction: column;
             }
             .game-canvas {
-                width: 100%; /* Make canvas responsive */
+                width: 100%;
                 max-width: 400px;
-                height: auto; /* Maintain aspect ratio */
+                height: auto;
             }
             .quiz-options label {
                 font-size: 1em;
@@ -397,7 +386,7 @@
                 <!-- Quiz questions will be loaded here by JavaScript -->
             </div>
             <button id="submitQuiz">Submit Answers</button>
-            <div id="quizResults" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.2em; color: var(--brevis-dark-green);"></div>
+            <div id="quizResults" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.1em; color: var(--brevis-dark-green);"></div>
         </section>
     </div>
 
@@ -440,7 +429,7 @@
             generateFood();
             if (gameInterval) clearInterval(gameInterval);
             gameInterval = setInterval(mainSnakeGame, 150);
-            snakeGameCanvas.focus(); // Give focus to canvas for controls
+            // snakeGameCanvas.focus(); // Removed focus call to prevent auto-focus issues
         }
 
         function generateFood() {
@@ -448,10 +437,9 @@
                 x: Math.floor(Math.random() * (snakeGameCanvas.width / gridSize)) * gridSize,
                 y: Math.floor(Math.random() * (snakeGameCanvas.height / gridSize)) * gridSize
             };
-            // Ensure food doesn't spawn on snake
             for(let i = 0; i < snake.length; i++) {
                 if(food.x === snake[i].x && food.y === snake[i].y) {
-                    generateFood(); // Regenerate if collision
+                    generateFood();
                     return;
                 }
             }
@@ -570,7 +558,7 @@
             jumpingHighScoreDisplay.textContent = getHighScore('jumping');
             if (jumpGameInterval) clearInterval(jumpGameInterval);
             jumpGameInterval = setInterval(updateJumpingGame, 20);
-            jumpingGameCanvas.focus(); // Give focus to canvas for controls
+            // jumpingGameCanvas.focus(); // Removed focus call
         }
 
         function createObstacle() {
@@ -663,4 +651,78 @@
             {
                 question: "What year was Bitcoin's whitepaper published?",
                 options: ["2007", "2008", "2009", "2010"],
-                an
+                answer: "2008"
+            },
+            {
+                question: "Who is the anonymous creator of Bitcoin?",
+                options: ["Vitalik Buterin", "Hal Finney", "Satoshi Nakamoto", "Charlie Lee"],
+                answer: "Satoshi Nakamoto"
+            },
+            {
+                question: "Which cryptocurrency introduced smart contracts?",
+                options: ["Bitcoin", "Litecoin", "Ethereum", "Ripple"],
+                answer: "Ethereum"
+            },
+            {
+                question: "What is a blockchain?",
+                options: [
+                    "A type of digital wallet",
+                    "A centralized database",
+                    "A distributed public ledger",
+                    "A mining algorithm"
+                ],
+                answer: "A distributed public ledger"
+            },
+            {
+                question: "Brevis Ecosystem ka header name kya hai?",
+                options: ["Crypto World", "Brevis Hub", "Brevis Ecosystem", "Digital Brevis"],
+                answer: "Brevis Ecosystem"
+            }
+        ];
+
+        const quizContainer = document.getElementById('quizContainer');
+        const submitQuizBtn = document.getElementById('submitQuiz');
+        const quizResultsDiv = document.getElementById('quizResults');
+
+        function loadQuiz() {
+            quizContainer.innerHTML = '';
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('quiz-question');
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.classList.add('quiz-options');
+
+                q.options.forEach(option => {
+                    const label = document.createElement('label');
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question${index}`;
+                    input.value = option;
+                    label.appendChild(input);
+                    label.appendChild(document.createTextNode(option));
+                    optionsDiv.appendChild(label);
+                });
+                questionDiv.appendChild(optionsDiv);
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            let correctAnswers = 0;
+            quizQuestions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption && selectedOption.value === q.answer) {
+                    correctAnswers++;
+                }
+            });
+            quizResultsDiv.textContent = `You scored ${correctAnswers} out of ${quizQuestions.length}!`;
+        }
+
+        loadQuiz();
+        submitQuizBtn.addEventListener('click', submitQuiz);
+
+    </script>
+</body>
+</html>
