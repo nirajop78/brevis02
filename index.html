@@ -100,13 +100,17 @@
 
             <h3>Snake Game</h3>
             <canvas id="snakeGameCanvas" class="game-canvas" width="400" height="400"></canvas>
-            <p style="text-align: center;">Use Arrow keys to play!</p>
+            <p style="text-align: center;">Use Arrow keys to play! (Click on the game area first)</p>
+            <div style="text-align: center; margin-top: 10px;">
+                <button id="resetSnakeGame">Reset Snake Game</button>
+            </div>
 
-            <h3>Jumping Game</h3>
+            <h3 style="margin-top: 30px;">Jumping Game</h3>
             <canvas id="jumpingGameCanvas" class="game-canvas" width="400" height="400"></canvas>
-            <p style="text-align: center;">Press Spacebar to jump!</p>
-
-            <!-- More games can be added here -->
+            <p style="text-align: center;">Press Spacebar to jump! (Click on the game area first)</p>
+            <div style="text-align: center; margin-top: 10px;">
+                <button id="resetJumpingGame">Reset Jumping Game</button>
+            </div>
         </section>
 
         <section id="crypto-history" class="crypto-history-section">
@@ -136,7 +140,6 @@
                 <li><strong>2015:</strong> Ethereum launches, introducing Smart Contracts</li>
                 <li><strong>Present:</strong> Rapid growth of DeFi, NFTs, Web3, and various blockchain applications.</li>
             </ul>
-             
         </section>
 
         <section id="quiz" class="quiz-section">
@@ -160,13 +163,19 @@
         const snakeGameCanvas = document.getElementById('snakeGameCanvas');
         const snakeCtx = snakeGameCanvas.getContext('2d');
         const gridSize = 20;
-        let snake = [{x: 10, y: 10}];
-        let food = {};
-        let dx = gridSize;
-        let dy = 0;
-        let score = 0;
-        let gameInterval;
-        let isSnakeGameOver = false;
+        let snake, food, dx, dy, score, gameInterval, isSnakeGameOver;
+
+        function initializeSnakeGame() {
+            snake = [{x: 10 * gridSize, y: 10 * gridSize}];
+            food = {};
+            dx = gridSize; // Start moving right
+            dy = 0;
+            score = 0;
+            isSnakeGameOver = false;
+            generateFood();
+            if (gameInterval) clearInterval(gameInterval); // Clear any existing interval
+            gameInterval = setInterval(mainSnakeGame, 150); // Slower initial speed
+        }
 
         function generateFood() {
             food = {
@@ -197,25 +206,36 @@
             if (isSnakeGameOver) return;
 
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-            snake.unshift(head);
+
+            // Check if snake hits itself or walls
+            if (didGameEnd(head)) {
+                isSnakeGameOver = true;
+                clearInterval(gameInterval);
+                alert('Snake Game Over! Score: ' + score);
+                return;
+            }
+
+            snake.unshift(head); // Add new head
 
             const didEatFood = head.x === food.x && head.y === food.y;
             if (didEatFood) {
                 score += 10;
                 generateFood();
             } else {
-                snake.pop();
+                snake.pop(); // Remove tail if no food eaten
             }
         }
 
-        function didGameEnd() {
-            for (let i = 4; i < snake.length; i++) {
-                if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
+        function didGameEnd(head) {
+            // Check if head collides with any part of the snake's body
+            for (let i = 1; i < snake.length; i++) { // Start from 1 to avoid checking against itself immediately
+                if (head.x === snake[i].x && head.y === snake[i].y) return true;
             }
-            const hitLeftWall = snake[0].x < 0;
-            const hitRightWall = snake[0].x >= snakeGameCanvas.width;
-            const hitTopWall = snake[0].y < 0;
-            const hitBottomWall = snake[0].y >= snakeGameCanvas.height;
+            // Check wall collision
+            const hitLeftWall = head.x < 0;
+            const hitRightWall = head.x >= snakeGameCanvas.width;
+            const hitTopWall = head.y < 0;
+            const hitBottomWall = head.y >= snakeGameCanvas.height;
             return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
         }
 
@@ -224,6 +244,8 @@
             const RIGHT_KEY = 39;
             const UP_KEY = 38;
             const DOWN_KEY = 40;
+
+            if (isSnakeGameOver) return; // Don't allow direction changes if game is over
 
             const keyPressed = event.keyCode;
             const goingUp = dy === -gridSize;
@@ -234,53 +256,49 @@
             if (keyPressed === LEFT_KEY && !goingRight) {
                 dx = -gridSize;
                 dy = 0;
-            }
-            if (keyPressed === UP_KEY && !goingDown) {
+            } else if (keyPressed === UP_KEY && !goingDown) { // Changed to else if
                 dx = 0;
                 dy = -gridSize;
-            }
-            if (keyPressed === RIGHT_KEY && !goingLeft) {
+            } else if (keyPressed === RIGHT_KEY && !goingLeft) { // Changed to else if
                 dx = gridSize;
                 dy = 0;
-            }
-            if (keyPressed === DOWN_KEY && !goingUp) {
+            } else if (keyPressed === DOWN_KEY && !goingUp) { // Changed to else if
                 dx = 0;
                 dy = gridSize;
             }
         }
 
         function mainSnakeGame() {
-            if (didGameEnd()) {
-                isSnakeGameOver = true;
-                clearInterval(gameInterval);
-                alert('Snake Game Over! Score: ' + score);
-                return;
-            }
-            setTimeout(function onTick() {
-                snakeCtx.clearRect(0, 0, snakeGameCanvas.width, snakeGameCanvas.height);
-                drawFood();
-                advanceSnake();
-                drawSnake();
-                mainSnakeGame();
-            }, 100);
+            if (isSnakeGameOver) return;
+            snakeCtx.clearRect(0, 0, snakeGameCanvas.width, snakeGameCanvas.height);
+            drawFood();
+            advanceSnake();
+            drawSnake();
         }
 
-        generateFood();
         document.addEventListener('keydown', changeDirection);
-        mainSnakeGame(); // Start the snake game
+        document.getElementById('resetSnakeGame').addEventListener('click', initializeSnakeGame);
+        initializeSnakeGame(); // Start the snake game on page load
 
         // --- Jumping Game Logic ---
         const jumpingGameCanvas = document.getElementById('jumpingGameCanvas');
         const jumpingCtx = jumpingGameCanvas.getContext('2d');
-        let player = { x: 50, y: jumpingGameCanvas.height - 30, width: 20, height: 20, dy: 0, gravity: 0.5, jumpPower: -10, onGround: true };
-        let obstacles = [];
-        let jumpGameScore = 0;
-        let frame = 0;
-        let isJumpingGameOver = false;
-        let jumpGameInterval;
+        let player, obstacles, jumpGameScore, frame, isJumpingGameOver, jumpGameInterval;
+
+        function initializeJumpingGame() {
+            player = { x: 50, y: jumpingGameCanvas.height - 30, width: 20, height: 20, dy: 0, gravity: 0.5, jumpPower: -10, onGround: true };
+            obstacles = [];
+            jumpGameScore = 0;
+            frame = 0;
+            isJumpingGameOver = false;
+            if (jumpGameInterval) clearInterval(jumpGameInterval); // Clear existing interval
+            jumpGameInterval = setInterval(updateJumpingGame, 20); // 50 frames per second
+        }
 
         function createObstacle() {
-            const obstacleHeight = 20 + Math.random() * 30;
+            const minHeight = 20;
+            const maxHeight = 50;
+            const obstacleHeight = minHeight + Math.random() * (maxHeight - minHeight);
             obstacles.push({
                 x: jumpingGameCanvas.width,
                 y: jumpingGameCanvas.height - obstacleHeight,
@@ -348,6 +366,7 @@
         }
 
         function jump() {
+            if (isJumpingGameOver) return; // Don't allow jump if game is over
             if (player.onGround) {
                 player.dy = player.jumpPower;
                 player.onGround = false;
@@ -360,7 +379,8 @@
             }
         });
 
-        jumpGameInterval = setInterval(updateJumpingGame, 20); // 50 frames per second
+        document.getElementById('resetJumpingGame').addEventListener('click', initializeJumpingGame);
+        initializeJumpingGame(); // Start the jumping game on page load
 
 
         // --- Quiz Logic ---
@@ -402,6 +422,7 @@
         const quizResultsDiv = document.getElementById('quizResults');
 
         function loadQuiz() {
+            quizContainer.innerHTML = ''; // Clear previous questions if any
             quizQuestions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.classList.add('quiz-question');
