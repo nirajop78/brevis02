@@ -4,86 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Brevis Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brevis-green: #28a745;
+            --brevis-dark-green: #218838;
+            --brevis-light-gray: #f4f4f4;
+            --brevis-dark-gray: #333;
+            --text-color: #333;
+            --white: #ffffff;
+            --border-color: #ddd;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--brevis-light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
         }
+
         header {
-            background-color: #28a745; /* Brevis green */
-            color: white;
+            background-color: var(--brevis-dark-gray); /* Changed header background */
+            color: var(--white);
             padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        header .logo {
+            width: 50px;
+            height: 50px;
+            background-color: var(--brevis-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5em;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            color: var(--white);
+        }
+
+        nav {
+            background-color: var(--brevis-green);
+            color: var(--white);
+            padding: 0.8rem 0;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        nav {
-            background-color: #333;
-            color: white;
-            padding: 0.5rem 0;
-            text-align: center;
-        }
         nav a {
-            color: white;
+            color: var(--white);
             text-decoration: none;
-            padding: 0 1rem;
-            transition: background-color 0.3s ease;
+            padding: 0 1.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+            font-size: 1.1em;
+            position: relative;
         }
         nav a:hover {
-            background-color: #555;
+            background-color: var(--brevis-dark-green);
+            transform: translateY(-2px);
         }
-        .container {
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%) scaleX(0);
+            width: 0;
+            height: 3px;
+            background-color: var(--white);
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+        nav a:hover::after {
             width: 80%;
+            transform: translateX(-50%) scaleX(1);
+        }
+
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
             margin: 2rem auto;
-            background-color: white;
-            padding: 2rem;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            background-color: var(--white);
+            padding: 2.5rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
         }
         h1, h2, h3 {
-            color: #28a745;
+            color: var(--brevis-green);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
+        h2 {
+            font-size: 2em;
+            border-bottom: 2px solid var(--brevis-light-gray);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        h3 {
+            font-size: 1.5em;
+            margin-top: 1.5rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+
         .game-section, .crypto-history-section, .quiz-section {
-            margin-bottom: 3rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 2rem;
+            margin-bottom: 3.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
+        .game-section:last-child, .crypto-history-section:last-child, .quiz-section:last-child {
+             border-bottom: none; /* No border for the last section */
+        }
+
+
+        .game-area {
+            display: flex;
+            flex-direction: column; /* Changed to column for better responsiveness */
+            align-items: center;
+            gap: 20px;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: #fcfcfc;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            justify-content: center;
+        }
+
         .game-canvas {
-            border: 2px solid #28a745;
-            background-color: #eee;
+            border: 3px solid var(--brevis-green);
+            background-color: #eafaea; /* Light green background for canvas */
             display: block;
-            margin: 1rem auto;
+            margin: 0 auto;
+            border-radius: 5px;
         }
-        .quiz-options label {
-            display: block;
+
+        .game-info {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--brevis-dark-gray);
+        }
+
+        .high-score-display {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--brevis-dark-green);
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #e6ffe6;
+            border-radius: 5px;
+            border: 1px dashed var(--brevis-green);
+        }
+
+        .how-to-play {
+            margin-top: 1rem;
+            background-color: #f9f9f9;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--brevis-green);
+            border-radius: 5px;
+        }
+        .how-to-play h4 {
+            color: var(--brevis-green);
+            margin-top: 0;
             margin-bottom: 0.5rem;
         }
+
+
+        .quiz-options label {
+            display: block;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            font-size: 1.1em;
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .quiz-options label:hover {
+            background-color: #e6ffe6;
+            border-color: var(--brevis-green);
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: var(--brevis-green); /* Style radio button */
+        }
+
         button {
-            background-color: #28a745;
-            color: white;
+            background-color: var(--brevis-green);
+            color: var(--white);
             border: none;
-            padding: 0.7rem 1.5rem;
+            padding: 0.8rem 1.8rem;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         button:hover {
-            background-color: #218838;
+            background-color: var(--brevis-dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
         footer {
             text-align: center;
-            padding: 1.5rem;
-            background-color: #333;
-            color: white;
-            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--brevis-dark-gray);
+            color: var(--white);
+            margin-top: 3.5rem;
+            font-size: 0.9em;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            header .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+            nav a {
+                padding: 0 0.8rem;
+                font-size: 1em;
+            }
+            .container {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            .game-area {
+                flex-direction: column;
+            }
+            .game-canvas {
+                width: 100%; /* Make canvas responsive */
+                max-width: 400px;
+                height: auto; /* Maintain aspect ratio */
+            }
+            .quiz-options label {
+                font-size: 1em;
+                padding: 6px 8px;
+            }
+            button {
+                padding: 0.7rem 1.2rem;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                gap: 5px;
+            }
+            nav a {
+                padding: 0 0.5rem;
+                font-size: 0.9em;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .game-controls {
+                flex-direction: column;
+            }
+        }
+
     </style>
 </head>
 <body>
     <header>
+        <div class="logo">B</div>
         <h1>Welcome to Brevis Ecosystem</h1>
     </header>
 
@@ -96,74 +321,112 @@
     <div class="container">
         <section id="games" class="game-section">
             <h2>Our Fun Games!</h2>
-            <p>Dive into our classic games and challenge yourself.</p>
+            <p>Dive into our classic games and challenge yourself to beat your high score!</p>
 
+            <!-- Snake Game -->
             <h3>Snake Game</h3>
-            <canvas id="snakeGameCanvas" class="game-canvas" width="400" height="400"></canvas>
-            <p style="text-align: center;">Use Arrow keys to play! (Click on the game area first)</p>
-            <div style="text-align: center; margin-top: 10px;">
-                <button id="resetSnakeGame">Reset Snake Game</button>
+            <div class="game-area">
+                <canvas id="snakeGameCanvas" class="game-canvas" width="400" height="400"></canvas>
+                <div class="game-info">
+                    <p>Current Score: <span id="snakeCurrentScore">0</span> | High Score: <span id="snakeHighScore">0</span></p>
+                    <div class="how-to-play">
+                        <h4>How to Play:</h4>
+                        <p>Use <strong>Arrow Keys (↑↓←→)</strong> to control the snake. Eat the red food to grow and score points. Don't hit the walls or your own tail!</p>
+                        <p><em>Click on the game area first to ensure controls work.</em></p>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button id="resetSnakeGame">Start / Reset Game</button>
+                </div>
             </div>
 
-            <h3 style="margin-top: 30px;">Jumping Game</h3>
-            <canvas id="jumpingGameCanvas" class="game-canvas" width="400" height="400"></canvas>
-            <p style="text-align: center;">Press Spacebar to jump! (Click on the game area first)</p>
-            <div style="text-align: center; margin-top: 10px;">
-                <button id="resetJumpingGame">Reset Jumping Game</button>
+            <!-- Jumping Game -->
+            <h3 style="margin-top: 3.5rem;">Jumping Game</h3>
+            <div class="game-area">
+                <canvas id="jumpingGameCanvas" class="game-canvas" width="400" height="400"></canvas>
+                <div class="game-info">
+                    <p>Current Score: <span id="jumpingCurrentScore">0</span> | High Score: <span id="jumpingHighScore">0</span></p>
+                     <div class="how-to-play">
+                        <h4>How to Play:</h4>
+                        <p>Press <strong>Spacebar</strong> to make the blue square jump. Avoid the red obstacles as they come towards you. Score points for every obstacle you pass!</p>
+                        <p><em>Click on the game area first to ensure controls work.</em></p>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button id="resetJumpingGame">Start / Reset Game</button>
+                </div>
             </div>
         </section>
 
         <section id="crypto-history" class="crypto-history-section">
             <h2>A Brief History of Blockchain and Crypto</h2>
-            <p>Explore the journey of digital currencies and decentralized technology.</p>
+            <p>Explore the journey of digital currencies and decentralized technology. From its enigmatic beginnings to its revolutionary present, understand how crypto is reshaping our world.</p>
             <p>
                 The concept of cryptocurrency began to take shape with the idea of "digital cash" in the 1980s and 90s.
-                Early attempts like DigiCash aimed at anonymous electronic transactions but faced challenges.
+                Early attempts like DigiCash aimed at anonymous electronic transactions but faced challenges due to double-spending problems and the need for central authorities.
                 The real breakthrough came in 2008 with the publication of a whitepaper by an anonymous entity known as Satoshi Nakamoto,
-                detailing Bitcoin – the world's first decentralized cryptocurrency.
+                detailing Bitcoin – the world's first truly decentralized cryptocurrency.
             </p>
             <p>
                 Bitcoin launched in 2009, introducing the revolutionary concept of blockchain, a distributed public ledger.
-                This technology ensured transparency, security, and immutability without the need for a central authority.
-                Following Bitcoin's success, numerous other cryptocurrencies, known as altcoins, emerged, each with unique features and use cases.
-                Ethereum, launched in 2015, introduced smart contracts, allowing for decentralized applications (DApps) and a whole new ecosystem of possibilities beyond simple transactions.
+                This technology ensured transparency, security, and immutability without the need for a single point of failure or central bank control.
+                Following Bitcoin's monumental success, numerous other cryptocurrencies, known as altcoins, emerged, each with unique features, consensus mechanisms, and use cases.
+                Ethereum, launched in 2015 by Vitalik Buterin, took the innovation a step further by introducing smart contracts, allowing for decentralized applications (DApps), NFTs, and a whole new ecosystem of possibilities beyond simple peer-to-peer transactions.
             </p>
             <p>
-                Today, blockchain technology is impacting various industries, from finance and supply chain to healthcare and gaming.
-                It continues to evolve, promising a more decentralized and transparent future.
+                Today, blockchain technology is impacting various industries, from finance and supply chain management to healthcare, digital identity, and gaming (Web3).
+                It continues to evolve rapidly, promising a more decentralized, transparent, and user-controlled future, although it still faces challenges related to scalability, regulation, and mainstream adoption.
             </p>
-            <h3>Key Milestones:</h3>
+            <h3>Key Milestones in Crypto History:</h3>
             <ul>
-                <li><strong>1990s:</strong> Early digital cash experiments (DigiCash)</li>
-                <li><strong>2008:</strong> Bitcoin Whitepaper by Satoshi Nakamoto</li>
-                <li><strong>2009:</strong> Bitcoin Network goes live</li>
-                <li><strong>2015:</strong> Ethereum launches, introducing Smart Contracts</li>
-                <li><strong>Present:</strong> Rapid growth of DeFi, NFTs, Web3, and various blockchain applications.</li>
+                <li><strong>Late 1980s - 1990s:</strong> Early cryptography and digital cash experiments (e.g., Digicash by David Chaum).</li>
+                <li><strong>2008:</strong> Satoshi Nakamoto publishes the Bitcoin whitepaper, outlining a peer-to-peer electronic cash system.</li>
+                <li><strong>2009:</strong> Bitcoin network goes live; first Bitcoin block mined (Genesis Block).</li>
+                <li><strong>2010:</strong> First real-world Bitcoin transaction (10,000 BTC for two pizzas).</li>
+                <li><strong>2015:</strong> Ethereum launches, introducing programmable blockchain with smart contracts.</li>
+                <li><strong>2017:</strong> Initial Coin Offering (ICO) boom, increasing public awareness of crypto.</li>
+                <li><strong>2020-Present:</strong> Explosion of Decentralized Finance (DeFi), Non-Fungible Tokens (NFTs), and Web3 initiatives.</li>
             </ul>
         </section>
 
         <section id="quiz" class="quiz-section">
             <h2>Test Your Knowledge! (Brevis Ecosystem Quiz)</h2>
-            <p>Answer the questions below to test your understanding.</p>
+            <p>Put your blockchain and crypto knowledge to the test. Answer the questions below to see how well you understand this innovative space.</p>
 
             <div id="quizContainer">
                 <!-- Quiz questions will be loaded here by JavaScript -->
             </div>
             <button id="submitQuiz">Submit Answers</button>
-            <div id="quizResults" style="margin-top: 1rem; font-weight: bold;"></div>
+            <div id="quizResults" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.2em; color: var(--brevis-dark-green);"></div>
         </section>
     </div>
 
     <footer>
-        &copy; 2023 Brevis Ecosystem. All rights reserved.
+        &copy; 2023 Brevis Ecosystem. All rights reserved. | Built with Passion and Code
     </footer>
 
     <script>
+        // --- High Score Storage ---
+        function getHighScore(gameName) {
+            return parseInt(localStorage.getItem(gameName + 'HighScore')) || 0;
+        }
+
+        function setHighScore(gameName, score) {
+            const currentHighScore = getHighScore(gameName);
+            if (score > currentHighScore) {
+                localStorage.setItem(gameName + 'HighScore', score);
+                return score; // Return new high score
+            }
+            return currentHighScore; // Return existing high score
+        }
+
         // --- Snake Game Logic ---
         const snakeGameCanvas = document.getElementById('snakeGameCanvas');
         const snakeCtx = snakeGameCanvas.getContext('2d');
         const gridSize = 20;
         let snake, food, dx, dy, score, gameInterval, isSnakeGameOver;
+        let snakeCurrentScoreDisplay = document.getElementById('snakeCurrentScore');
+        let snakeHighScoreDisplay = document.getElementById('snakeHighScore');
 
         function initializeSnakeGame() {
             snake = [{x: 10 * gridSize, y: 10 * gridSize}];
@@ -172,9 +435,12 @@
             dy = 0;
             score = 0;
             isSnakeGameOver = false;
+            snakeCurrentScoreDisplay.textContent = score;
+            snakeHighScoreDisplay.textContent = getHighScore('snake');
             generateFood();
-            if (gameInterval) clearInterval(gameInterval); // Clear any existing interval
-            gameInterval = setInterval(mainSnakeGame, 150); // Slower initial speed
+            if (gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(mainSnakeGame, 150);
+            snakeGameCanvas.focus(); // Give focus to canvas for controls
         }
 
         function generateFood() {
@@ -182,6 +448,13 @@
                 x: Math.floor(Math.random() * (snakeGameCanvas.width / gridSize)) * gridSize,
                 y: Math.floor(Math.random() * (snakeGameCanvas.height / gridSize)) * gridSize
             };
+            // Ensure food doesn't spawn on snake
+            for(let i = 0; i < snake.length; i++) {
+                if(food.x === snake[i].x && food.y === snake[i].y) {
+                    generateFood(); // Regenerate if collision
+                    return;
+                }
+            }
         }
 
         function drawSnakePart(snakePart) {
@@ -207,31 +480,31 @@
 
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
 
-            // Check if snake hits itself or walls
             if (didGameEnd(head)) {
                 isSnakeGameOver = true;
                 clearInterval(gameInterval);
-                alert('Snake Game Over! Score: ' + score);
+                const finalHighScore = setHighScore('snake', score);
+                snakeHighScoreDisplay.textContent = finalHighScore;
+                alert('Snake Game Over! Your Score: ' + score + '\nHigh Score: ' + finalHighScore);
                 return;
             }
 
-            snake.unshift(head); // Add new head
+            snake.unshift(head);
 
             const didEatFood = head.x === food.x && head.y === food.y;
             if (didEatFood) {
                 score += 10;
+                snakeCurrentScoreDisplay.textContent = score;
                 generateFood();
             } else {
-                snake.pop(); // Remove tail if no food eaten
+                snake.pop();
             }
         }
 
         function didGameEnd(head) {
-            // Check if head collides with any part of the snake's body
-            for (let i = 1; i < snake.length; i++) { // Start from 1 to avoid checking against itself immediately
+            for (let i = 1; i < snake.length; i++) {
                 if (head.x === snake[i].x && head.y === snake[i].y) return true;
             }
-            // Check wall collision
             const hitLeftWall = head.x < 0;
             const hitRightWall = head.x >= snakeGameCanvas.width;
             const hitTopWall = head.y < 0;
@@ -245,7 +518,7 @@
             const UP_KEY = 38;
             const DOWN_KEY = 40;
 
-            if (isSnakeGameOver) return; // Don't allow direction changes if game is over
+            if (isSnakeGameOver) return;
 
             const keyPressed = event.keyCode;
             const goingUp = dy === -gridSize;
@@ -256,13 +529,13 @@
             if (keyPressed === LEFT_KEY && !goingRight) {
                 dx = -gridSize;
                 dy = 0;
-            } else if (keyPressed === UP_KEY && !goingDown) { // Changed to else if
+            } else if (keyPressed === UP_KEY && !goingDown) {
                 dx = 0;
                 dy = -gridSize;
-            } else if (keyPressed === RIGHT_KEY && !goingLeft) { // Changed to else if
+            } else if (keyPressed === RIGHT_KEY && !goingLeft) {
                 dx = gridSize;
                 dy = 0;
-            } else if (keyPressed === DOWN_KEY && !goingUp) { // Changed to else if
+            } else if (keyPressed === DOWN_KEY && !goingUp) {
                 dx = 0;
                 dy = gridSize;
             }
@@ -278,12 +551,14 @@
 
         document.addEventListener('keydown', changeDirection);
         document.getElementById('resetSnakeGame').addEventListener('click', initializeSnakeGame);
-        initializeSnakeGame(); // Start the snake game on page load
+        initializeSnakeGame();
 
         // --- Jumping Game Logic ---
         const jumpingGameCanvas = document.getElementById('jumpingGameCanvas');
         const jumpingCtx = jumpingGameCanvas.getContext('2d');
         let player, obstacles, jumpGameScore, frame, isJumpingGameOver, jumpGameInterval;
+        let jumpingCurrentScoreDisplay = document.getElementById('jumpingCurrentScore');
+        let jumpingHighScoreDisplay = document.getElementById('jumpingHighScore');
 
         function initializeJumpingGame() {
             player = { x: 50, y: jumpingGameCanvas.height - 30, width: 20, height: 20, dy: 0, gravity: 0.5, jumpPower: -10, onGround: true };
@@ -291,8 +566,11 @@
             jumpGameScore = 0;
             frame = 0;
             isJumpingGameOver = false;
-            if (jumpGameInterval) clearInterval(jumpGameInterval); // Clear existing interval
-            jumpGameInterval = setInterval(updateJumpingGame, 20); // 50 frames per second
+            jumpingCurrentScoreDisplay.textContent = jumpGameScore;
+            jumpingHighScoreDisplay.textContent = getHighScore('jumping');
+            if (jumpGameInterval) clearInterval(jumpGameInterval);
+            jumpGameInterval = setInterval(updateJumpingGame, 20);
+            jumpingGameCanvas.focus(); // Give focus to canvas for controls
         }
 
         function createObstacle() {
@@ -327,13 +605,13 @@
             jumpingCtx.fillRect(player.x, player.y, player.width, player.height);
 
             // Update and draw obstacles
-            if (frame % 100 === 0) { // Add new obstacle every 100 frames
+            if (frame % 100 === 0) {
                 createObstacle();
             }
 
             for (let i = 0; i < obstacles.length; i++) {
                 let obs = obstacles[i];
-                obs.x -= 3; // Obstacle speed
+                obs.x -= 3;
 
                 // Check for collision
                 if (player.x < obs.x + obs.width &&
@@ -342,7 +620,9 @@
                     player.y + player.height > obs.y) {
                     isJumpingGameOver = true;
                     clearInterval(jumpGameInterval);
-                    alert('Jumping Game Over! Score: ' + jumpGameScore);
+                    const finalHighScore = setHighScore('jumping', jumpGameScore);
+                    jumpingHighScoreDisplay.textContent = finalHighScore;
+                    alert('Jumping Game Over! Your Score: ' + jumpGameScore + '\nHigh Score: ' + finalHighScore);
                     return;
                 }
 
@@ -353,20 +633,15 @@
                 if (obs.x + obs.width < 0) {
                     obstacles.splice(i, 1);
                     jumpGameScore++;
-                    i--; // Adjust index after removal
+                    jumpingCurrentScoreDisplay.textContent = jumpGameScore;
+                    i--;
                 }
             }
-
-            // Draw score
-            jumpingCtx.fillStyle = 'black';
-            jumpingCtx.font = '16px Arial';
-            jumpingCtx.fillText('Score: ' + jumpGameScore, 10, 20);
-
             frame++;
         }
 
         function jump() {
-            if (isJumpingGameOver) return; // Don't allow jump if game is over
+            if (isJumpingGameOver) return;
             if (player.onGround) {
                 player.dy = player.jumpPower;
                 player.onGround = false;
@@ -380,7 +655,7 @@
         });
 
         document.getElementById('resetJumpingGame').addEventListener('click', initializeJumpingGame);
-        initializeJumpingGame(); // Start the jumping game on page load
+        initializeJumpingGame();
 
 
         // --- Quiz Logic ---
@@ -388,78 +663,4 @@
             {
                 question: "What year was Bitcoin's whitepaper published?",
                 options: ["2007", "2008", "2009", "2010"],
-                answer: "2008"
-            },
-            {
-                question: "Who is the anonymous creator of Bitcoin?",
-                options: ["Vitalik Buterin", "Hal Finney", "Satoshi Nakamoto", "Charlie Lee"],
-                answer: "Satoshi Nakamoto"
-            },
-            {
-                question: "Which cryptocurrency introduced smart contracts?",
-                options: ["Bitcoin", "Litecoin", "Ethereum", "Ripple"],
-                answer: "Ethereum"
-            },
-            {
-                question: "What is a blockchain?",
-                options: [
-                    "A type of digital wallet",
-                    "A centralized database",
-                    "A distributed public ledger",
-                    "A mining algorithm"
-                ],
-                answer: "A distributed public ledger"
-            },
-            {
-                question: "Brevis Ecosystem ka header name kya hai?",
-                options: ["Crypto World", "Brevis Hub", "Brevis Ecosystem", "Digital Brevis"],
-                answer: "Brevis Ecosystem"
-            }
-        ];
-
-        const quizContainer = document.getElementById('quizContainer');
-        const submitQuizBtn = document.getElementById('submitQuiz');
-        const quizResultsDiv = document.getElementById('quizResults');
-
-        function loadQuiz() {
-            quizContainer.innerHTML = ''; // Clear previous questions if any
-            quizQuestions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('quiz-question');
-                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
-
-                const optionsDiv = document.createElement('div');
-                optionsDiv.classList.add('quiz-options');
-
-                q.options.forEach(option => {
-                    const label = document.createElement('label');
-                    const input = document.createElement('input');
-                    input.type = 'radio';
-                    input.name = `question${index}`;
-                    input.value = option;
-                    label.appendChild(input);
-                    label.appendChild(document.createTextNode(option));
-                    optionsDiv.appendChild(label);
-                });
-                questionDiv.appendChild(optionsDiv);
-                quizContainer.appendChild(questionDiv);
-            });
-        }
-
-        function submitQuiz() {
-            let correctAnswers = 0;
-            quizQuestions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-                if (selectedOption && selectedOption.value === q.answer) {
-                    correctAnswers++;
-                }
-            });
-            quizResultsDiv.textContent = `You scored ${correctAnswers} out of ${quizQuestions.length}!`;
-        }
-
-        loadQuiz();
-        submitQuizBtn.addEventListener('click', submitQuiz);
-
-    </script>
-</body>
-</html>
+                an
